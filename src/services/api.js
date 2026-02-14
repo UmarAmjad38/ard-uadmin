@@ -54,6 +54,7 @@ export const authAPI = {
 // Properties API
 export const propertiesAPI = {
     getAll: (params) => api.get('/properties', { params }),
+    getAllAdmin: (params) => api.get('/admin/properties', { params }),
     getById: (id) => api.get(`/properties/${id}`),
     getBySlug: (slug) => api.get(`/properties/slug/${slug}`),
     create: (formData) => api.post('/admin/properties', formData, {
@@ -69,7 +70,7 @@ export const propertiesAPI = {
 // Blogs API
 export const blogsAPI = {
     getAll: (params) => api.get('/blogs', { params }),
-    getAllAdmin: (params) => api.get('/blogs/all', { params }),
+    getAllAdmin: (params) => api.get('/admin/blogs', { params }),
     getById: (id) => api.get(`/blogs/${id}`),
     // getBySlug: (slug) => api.get(`/blogs/slug/${slug}`),
     create: (formData) => api.post('/admin/blogs', formData, {
@@ -89,7 +90,7 @@ export const dashboardAPI = {
 
 // Categories API
 export const categoriesAPI = {
-    getAll: () => api.get('/categories'),
+    getAll: () => api.get('/admin/categories'),
     getById: (id) => api.get(`/categories/${id}`),
     create: (data) => api.post('/admin/categories', data),
     update: (id, data) => api.put(`/admin/categories/${id}`, data),
@@ -122,7 +123,7 @@ export const contactsAPI = {
 
 // Interests API
 export const interestsAPI = {
-    getAll: () => api.get('/admin/interests'),
+    getAll: () => api.get('/interests'),
     create: (data) => api.post('/admin/interests', data),
     delete: (id) => api.delete(`/admin/interests/${id}`),
 };
