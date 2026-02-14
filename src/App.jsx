@@ -17,6 +17,9 @@ import CategoriesList from './pages/categories/CategoriesList';
 import TeamList from './pages/team/TeamList';
 import ContactsList from './pages/contacts/ContactsList';
 import ProfileSettings from './pages/settings/ProfileSettings';
+import HeroList from './pages/heroes/HeroList';
+import QnaList from './pages/qna/QnaList';
+import StatsList from './pages/stats/StatsList';
 
 function App() {
   return (
@@ -43,6 +46,9 @@ function App() {
             {/* <Route path="team" element={<TeamList />} /> */}
             <Route path="contacts" element={<ContactsList />} />
             <Route path="profile" element={<ProfileSettings />} />
+            <Route path="hero-sections" element={<HeroList />} />
+            <Route path="qnas" element={<QnaList />} />
+            <Route path="stats" element={<StatsList />} />
           </Route>
 
           {/* Catch all */}

@@ -69,9 +69,9 @@ export const propertiesAPI = {
 // Blogs API
 export const blogsAPI = {
     getAll: (params) => api.get('/blogs', { params }),
-    getAllAdmin: (params) => api.get('/admin/blogs/all', { params }),
+    getAllAdmin: (params) => api.get('/blogs/all', { params }),
     getById: (id) => api.get(`/blogs/${id}`),
-    getBySlug: (slug) => api.get(`/blogs/slug/${slug}`),
+    // getBySlug: (slug) => api.get(`/blogs/slug/${slug}`),
     create: (formData) => api.post('/admin/blogs', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
     }),
@@ -125,6 +125,42 @@ export const interestsAPI = {
     getAll: () => api.get('/admin/interests'),
     create: (data) => api.post('/admin/interests', data),
     delete: (id) => api.delete(`/admin/interests/${id}`),
+};
+
+// Pages API
+export const pagesAPI = {
+    getAll: () => api.get('/pages'),
+    create: (data) => api.post('/admin/pages', data),
+    update: (id, data) => api.put(`/admin/pages/${id}`, data),
+    delete: (id) => api.delete(`/admin/pages/${id}`),
+};
+
+// Hero Sections API
+export const heroSectionsAPI = {
+    getAll: (params) => api.get('/hero-sections', { params }),
+    create: (formData) => api.post('/admin/hero-sections', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+    }),
+    update: (id, formData) => api.put(`/admin/hero-sections/${id}`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+    }),
+    delete: (id) => api.delete(`/admin/hero-sections/${id}`),
+};
+
+// QnA API
+export const qnaAPI = {
+    getAll: () => api.get('/qnas'),
+    create: (data) => api.post('/admin/qnas', data),
+    update: (id, data) => api.put(`/admin/qnas/${id}`, data),
+    delete: (id) => api.delete(`/admin/qnas/${id}`),
+};
+
+// Stats API
+export const statsAPI = {
+    getAll: () => api.get('/stats'),
+    create: (data) => api.post('/admin/stats', data),
+    update: (id, data) => api.put(`/admin/stats/${id}`, data),
+    delete: (id) => api.delete(`/admin/stats/${id}`),
 };
 
 export default api;

@@ -9,7 +9,10 @@ import {
   FiLogOut,
   FiSettings,
   FiChevronLeft,
-  FiChevronRight
+  FiChevronRight,
+  FiLayout,
+  FiHelpCircle,
+  FiBarChart2
 } from 'react-icons/fi';
 import { useAuth } from '../../context/AuthContext';
 
@@ -22,6 +25,9 @@ const Sidebar = ({ isOpen, onClose, isCollapsed, onToggleCollapse }) => {
     { path: '/properties', icon: FiGrid, label: 'Properties' },
     { path: '/blogs', icon: FiFileText, label: 'Blogs' },
     { path: '/categories', icon: FiFolder, label: 'Categories' },
+    { path: '/hero-sections', icon: FiLayout, label: 'Hero Sections' }, // Added Hero Sections link
+    { path: '/qnas', icon: FiHelpCircle, label: 'QnA' }, // Added QnA link
+    { path: '/stats', icon: FiBarChart2, label: 'Stats' }, // Added Stats link
     // { path: '/team', icon: FiUsers, label: 'Team' }, // Commented out Team link
     { path: '/contacts', icon: FiMail, label: 'Contacts' },
     { path: '/profile', icon: FiSettings, label: 'Settings' }, // Added Profile Settings link
@@ -68,7 +74,7 @@ const Sidebar = ({ isOpen, onClose, isCollapsed, onToggleCollapse }) => {
           </div>
 
           {/* Navigation */}
-          <nav className={`flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar ${isCollapsed ? 'px-2' : 'px-4'} py-2`}>
+          <nav className={`flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar ${isCollapsed ? 'px-2' : 'px-4'}`}>
             <ul className="space-y-1.5">
               {menuItems.map((item) => {
                 const Icon = item.icon;
