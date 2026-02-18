@@ -64,10 +64,10 @@ const Sidebar = ({ isOpen, onClose, isCollapsed, onToggleCollapse }) => {
         </button>
         <div className="flex flex-col h-full overflow-hidden">
           {/* Logo Section - Cute Rounded */}
-          <div className={`flex items-center justify-center ${isCollapsed ? 'py-8' : 'px-6 py-8'}`}>
+          <div className={`flex items-center justify-center ${isCollapsed ? 'py-8' : 'px-4 py-8'}`}>
             <div className={`bg-primary-50 rounded-2xl flex items-center justify-center border border-primary-100 transition-all duration-300 flex-shrink-0 ${isCollapsed ? 'w-12 h-12' : 'p-4 w-full'}`}>
-              <h1 className={`font-bold text-xl text-primary-700 tracking-tighter transition-all duration-200 ${isCollapsed ? 'hidden' : 'block opacity-100'}`}>
-                Property Admin
+              <h1 className={`font-bold text-xl text-nowrap text-primary-700 tracking-tighter transition-all duration-200 ${isCollapsed ? 'hidden' : 'block opacity-100'}`}>
+                Ard Al Khair Dashboard
               </h1>
               {isCollapsed && <span className="text-xl font-black text-primary-700">P</span>}
             </div>
