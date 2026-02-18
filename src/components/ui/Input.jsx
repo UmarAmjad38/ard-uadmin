@@ -20,7 +20,7 @@ const Input = ({
           {required && <span className="text-red-500 ml-1 font-bold">*</span>}
         </label>
       )}
-      <div className="relative group">
+      <div className="relative">
         <input
           type={isPassword ? (showPassword ? 'text' : 'password') : type}
           className={`w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50/30 transition-all duration-200 outline-none focus:border-primary-400 focus:bg-white focus:ring-4 focus:ring-primary-500/10 placeholder:text-gray-400 text-sm ${
