@@ -15,6 +15,7 @@ const BlogForm = ({ blog, onClose, onSuccess }) => {
     category: '',
     author: '',
     published: false,
+    sections: [],
   });
   const [categories, setCategories] = useState([]);
   const [imageFile, setImageFile] = useState(null);
@@ -31,6 +32,7 @@ const BlogForm = ({ blog, onClose, onSuccess }) => {
         category: blog.category || '',
         author: blog.author || '',
         published: blog.published || false,
+        sections: blog.sections || [],
       });
       if (blog.featuredImage) {
         setImagePreview(blog.featuredImage);
@@ -67,6 +69,24 @@ const BlogForm = ({ blog, onClose, onSuccess }) => {
     }
   };
 
+  const addSection = () => {
+    setFormData({
+      ...formData,
+      sections: [...formData.sections, { subheading: '', content: '' }]
+    });
+  };
+
+  const removeSection = (index) => {
+    const newSections = formData.sections.filter((_, i) => i !== index);
+    setFormData({ ...formData, sections: newSections });
+  };
+
+  const handleSectionChange = (index, field, value) => {
+    const newSections = [...formData.sections];
+    newSections[index][field] = value;
+    setFormData({ ...formData, sections: newSections });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -79,6 +99,9 @@ const BlogForm = ({ blog, onClose, onSuccess }) => {
       if (formData.category) data.append('category', formData.category);
       if (formData.author) data.append('author', formData.author);
       data.append('published', formData.published);
+      if (formData.sections.length > 0) {
+        data.append('sections', JSON.stringify(formData.sections));
+      }
 
       if (imageFile) {
         data.append('featuredImage', imageFile);
@@ -146,6 +169,52 @@ const BlogForm = ({ blog, onClose, onSuccess }) => {
             value={formData.author}
             onChange={handleChange}
           />
+        </div>
+
+        <div className="mb-6 p-4 border border-gray-100 rounded-2xl bg-gray-50/30">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-sm font-bold text-gray-500 uppercase tracking-widest px-1">Detailed Blog Sections</h3>
+            <Button type="button" variant="secondary" size="sm" onClick={addSection}>
+              + Add Section
+            </Button>
+          </div>
+
+          {formData.sections.map((section, index) => (
+            <div key={index} className="mb-6 border border-gray-200 rounded-xl bg-white">
+              <div className="relative p-4 group">
+                <button
+                  type="button"
+                  onClick={() => removeSection(index)}
+                  className="absolute top-3 right-3 z-20 text-red-500 hover:text-red-700 p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L11.414 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </button>
+
+                <Input
+                  label={`Section ${index + 1} Subheading`}
+                  value={section.subheading}
+                  onChange={(e) => handleSectionChange(index, 'subheading', e.target.value)}
+                  placeholder="e.g. 1. Verify Property Ownership"
+                />
+
+                <Textarea
+                  label={`Section ${index + 1} Description`}
+                  value={section.content}
+                  onChange={(e) => handleSectionChange(index, 'content', e.target.value)}
+                  rows={4}
+                  placeholder="Detailed description for this section..."
+                />
+
+              </div>
+            </div>
+          ))}
+
+
+          {formData.sections.length === 0 && (
+            <p className="text-sm text-gray-400 text-center italic py-2">No detailed sections added yet.</p>
+          )}
         </div>
 
         <div className="mb-4">
