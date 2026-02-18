@@ -24,6 +24,8 @@ const PropertyForm = ({ property, onClose, onSuccess }) => {
     status: 'available',
     amenities: '',
     features: '',
+    customPropertyType: '',
+    isOtherType: false,
   });
   const [coverPhotoFile, setCoverPhotoFile] = useState(null);
   const [coverPhotoPreview, setCoverPhotoPreview] = useState('');
@@ -49,7 +51,12 @@ const PropertyForm = ({ property, onClose, onSuccess }) => {
         status: property.status || 'available',
         amenities: property.amenities?.join(', ') || '',
         features: property.features?.join(', ') || '',
+        customPropertyType: '',
+        isOtherType: property.propertyTypes?.[0] && !propertyTypeOptions.some(opt => opt.value === property.propertyTypes[0]) ? true : false,
       });
+      if (property.propertyTypes?.[0] && !propertyTypeOptions.some(opt => opt.value === property.propertyTypes[0])) {
+        setFormData(prev => ({ ...prev, customPropertyType: property.propertyTypes[0] }));
+      }
       if (property.coverPhoto) {
         setCoverPhotoPreview(property.coverPhoto);
       }
@@ -120,7 +127,11 @@ const PropertyForm = ({ property, onClose, onSuccess }) => {
       
       if (formData.propertyTypes.length > 0) {
         formData.propertyTypes.forEach(type => {
-          data.append('propertyTypes[]', type);
+          if (type === 'Other') {
+            data.append('propertyTypes[]', formData.customPropertyType);
+          } else {
+            data.append('propertyTypes[]', type);
+          }
         });
       }
       
@@ -182,7 +193,9 @@ const PropertyForm = ({ property, onClose, onSuccess }) => {
     { value: 'Penthouse', label: 'Penthouse' },
     { value: 'Villa', label: 'Villa' },
     { value: 'Duplex Villa', label: 'Duplex Villa' },
-    { value: 'Offices', label: 'Offices' }
+    { value: 'Offices', label: 'Offices' },
+    { value: 'Rent', label: 'Rent' },
+    { value: 'Other', label: 'Other (Type...)' }
   ];
 
   const statusOptions = [
@@ -233,10 +246,27 @@ const PropertyForm = ({ property, onClose, onSuccess }) => {
             label="Property Type"
             name="propertyTypes"
             value={formData.propertyTypes[0] || ''}
-            onChange={(e) => setFormData({ ...formData, propertyTypes: [e.target.value] })}
+            onChange={(e) => setFormData({ 
+              ...formData, 
+              propertyTypes: [e.target.value],
+              isOtherType: e.target.value === 'Other'
+            })}
             options={propertyTypeOptions}
             required
           />
+
+          {formData.isOtherType && (
+            <div className="md:col-span-2">
+              <Input
+                label="Custom Property Type"
+                name="customPropertyType"
+                value={formData.customPropertyType}
+                onChange={handleChange}
+                required
+                placeholder="e.g. Warehouse"
+              />
+            </div>
+          )}
 
           <div className="md:col-span-2">
             <Input
