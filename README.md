@@ -1,4 +1,4 @@
-# Property Admin Dashboard
+# Ard Al Khair Dashboard
 
 A comprehensive, unique white-themed admin dashboard for managing properties, blogs, team members, and contact leads.
 
